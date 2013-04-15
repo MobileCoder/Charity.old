@@ -1,0 +1,27 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Charity.master.cs" Inherits="AwsWebApp1.Charity" %>
+<%@ Register src="header.ascx" tagname="header" tagprefix="uc1" %>
+<%@ Register src="footer.ascx" tagname="Footer" tagprefix="uc2" %>
+<%@ Register src="SEO.ascx" tagname="SEO" tagprefix="uc3" %>
+<%@ Register src="GoogleAnalyticsHeader.ascx" tagname="GoogleAnalyticsHeader" tagprefix="uc4" %>
+<%@ Register src="GoogleAnalyticsBody.ascx" tagname="GoogleAnalyticsBody" tagprefix="uc5" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <uc3:SEO ID="SEOControl" runat="server" />
+    <uc4:GoogleAnalyticsHeader ID="GoogleAnalyticsHeader1" runat="server" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <uc1:header ID="HeaderWebUserControl1" runat="server" />
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <uc2:Footer ID="FooterControl" runat="server" />        
+        </div>        
+        <uc5:GoogleAnalyticsBody ID="GoogleAnalyticsBody1" runat="server" />
+    </form>
+</body>
+</html>
