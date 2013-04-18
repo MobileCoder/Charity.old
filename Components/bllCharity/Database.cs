@@ -77,7 +77,10 @@ namespace bllCharity
                                 ienum.MoveNext();
                             }
 
-                            return ds;
+                            if (ds.Tables[0].Rows.Count > 0)
+                                return ds;
+
+                            ds.Dispose();
                         }
                         catch (Exception)
                         {
