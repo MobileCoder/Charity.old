@@ -15,6 +15,11 @@ namespace AwsWebApp1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            User user = UserManager.FindUser("chberry@gmail.com");
+            if (user != null)
+            {
+                Response.Write(user.FirstName + " " + user.LastName);
+            }
         }
     }
 }

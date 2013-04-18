@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bllCharity", "Components\bllCharity\bllCharity.csproj", "{D57B8E3C-3178-41E9-9449-4F2FDE18A37E}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Scripts", "Scripts\Scripts.sqlproj", "{47FC04BF-DA48-41CC-9F7C-9F287A1EEF03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,12 @@ Global
 		{D57B8E3C-3178-41E9-9449-4F2FDE18A37E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D57B8E3C-3178-41E9-9449-4F2FDE18A37E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D57B8E3C-3178-41E9-9449-4F2FDE18A37E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47FC04BF-DA48-41CC-9F7C-9F287A1EEF03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47FC04BF-DA48-41CC-9F7C-9F287A1EEF03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47FC04BF-DA48-41CC-9F7C-9F287A1EEF03}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{47FC04BF-DA48-41CC-9F7C-9F287A1EEF03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47FC04BF-DA48-41CC-9F7C-9F287A1EEF03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47FC04BF-DA48-41CC-9F7C-9F287A1EEF03}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

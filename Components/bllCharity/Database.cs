@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
@@ -9,9 +11,12 @@ using System.Threading.Tasks;
 
 namespace bllCharity
 {
-    public interface IDatabaseTable
+    public abstract class DatabaseTable : ErrorManager
     {
-        string InsertSql { get; }
+        static public string FindSql(string key) { return string.Empty; }
+        static public string InsertSql(string key) { return string.Empty; }
+        public abstract bool LoadData(DataRow dr);
+        public abstract string UpdateSql { get; }
     }
 
     public class Database : ErrorManager
@@ -37,10 +42,8 @@ namespace bllCharity
             return null;
         }
 
-        static protected int NonQuery(string sql)
+        static protected DataSet Query(string sql)
         {
-            int rc = -1;
-
             DbConnection connection = Open();
             if (connection != null)
             {
@@ -48,7 +51,40 @@ namespace bllCharity
                 {
                     DbCommand command = connection.CreateCommand();
                     command.CommandText = sql;
-                    rc = command.ExecuteNonQuery();
+                    DbDataReader dr = command.ExecuteReader();
+                    if (dr != null)
+                    {
+                        DataSet ds = new DataSet();
+                        try
+                        {
+                            DataTable dt = new DataTable();
+                            ds.Tables.Add(dt);
+                            for (int i = 0; i < dr.FieldCount; i++)
+                            {
+                                dt.Columns.Add(dr.GetName(i), dr.GetFieldType(i));
+                            }
+
+                            IEnumerator ienum = dr.GetEnumerator();
+                            ienum.MoveNext();
+                            while (ienum.Current != null)
+                            {
+                                DataRow r = dt.NewRow();
+                                for (int j = 0; j < dr.FieldCount; j++)
+                                {
+                                    r[j] = dr.GetValue(j);
+                                }
+                                dt.Rows.Add(r);
+                                ienum.MoveNext();
+                            }
+
+                            return ds;
+                        }
+                        catch (Exception)
+                        {
+                            ds.Dispose();
+                            throw;
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -59,8 +95,30 @@ namespace bllCharity
                     connection.Close();
                 }
             }
+            return null;
+        }
 
-            return rc;
+        static protected int NonQuery(string sql)
+        {
+            DbConnection connection = Open();
+            if (connection != null)
+            {
+                try
+                {
+                    DbCommand command = connection.CreateCommand();
+                    command.CommandText = sql;
+                    return command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    ReportException(ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return -1;
         }
     }
 }
