@@ -11,19 +11,28 @@ using System.Threading.Tasks;
 
 namespace bllCharity
 {
-    public abstract class DatabaseTable : ErrorManager
-    {
-        static public string FindSql(string key) { return string.Empty; }
-        static public string InsertSql(string key) { return string.Empty; }
-        public abstract bool LoadData(DataRow dr);
-        public abstract string UpdateSql { get; }
-    }
-
     public class Database : ErrorManager
     {
-        static public ConnectionStringSettings Configuration { get; set; }
+        private static Database instance;
+        public static ConnectionStringSettings Configuration { get; set; }
 
-        static private DbConnection Open()
+        private Database()
+        {
+        }
+
+        public static Database Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Database();
+                }
+                return instance;
+            }
+        }        
+
+        private DbConnection Open()
         {
             try
             {
@@ -42,7 +51,7 @@ namespace bllCharity
             return null;
         }
 
-        static protected DataSet Query(string sql)
+        public DataTable Query(string sql)
         {
             DbConnection connection = Open();
             if (connection != null)
@@ -54,11 +63,9 @@ namespace bllCharity
                     DbDataReader dr = command.ExecuteReader();
                     if (dr != null)
                     {
-                        DataSet ds = new DataSet();
+                        DataTable dt = new DataTable();
                         try
                         {
-                            DataTable dt = new DataTable();
-                            ds.Tables.Add(dt);
                             for (int i = 0; i < dr.FieldCount; i++)
                             {
                                 dt.Columns.Add(dr.GetName(i), dr.GetFieldType(i));
@@ -77,14 +84,14 @@ namespace bllCharity
                                 ienum.MoveNext();
                             }
 
-                            if (ds.Tables[0].Rows.Count > 0)
-                                return ds;
+                            if (dt.Rows.Count > 0)
+                                return dt;
 
-                            ds.Dispose();
+                            dt.Dispose();
                         }
                         catch (Exception)
                         {
-                            ds.Dispose();
+                            dt.Dispose();
                             throw;
                         }
                     }
@@ -101,7 +108,7 @@ namespace bllCharity
             return null;
         }
 
-        static protected int NonQuery(string sql)
+        public int NonQuery(string sql)
         {
             DbConnection connection = Open();
             if (connection != null)

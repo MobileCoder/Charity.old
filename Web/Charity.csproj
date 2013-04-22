@@ -73,6 +73,7 @@
     <Content Include="images\drive.png" />
     <Content Include="images\server.png" />
     <Content Include="index.aspx" />
+    <Content Include="controls\ItemWebUserControl.ascx" />
     <Content Include="shared\footer.ascx" />
     <Content Include="shared\GoogleAnalyticsBody.ascx" />
     <Content Include="shared\GoogleAnalyticsHeader.ascx" />
@@ -91,6 +92,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="controls\ItemWebUserControl.ascx.cs">
+      <DependentUpon>ItemWebUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controls\ItemWebUserControl.ascx.designer.cs">
+      <DependentUpon>ItemWebUserControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="shared\GoogleAnalyticsBody.ascx.cs">
       <DependentUpon>GoogleAnalyticsBody.ascx</DependentUpon>

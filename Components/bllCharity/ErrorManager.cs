@@ -8,7 +8,7 @@ namespace bllCharity
 {
     public class ErrorManager
     {
-        static protected void ReportException(Exception ex)
+        protected void ReportException(Exception ex)
         {
             Console.WriteLine(ex.Message);
         }

@@ -10,15 +10,24 @@
 namespace AwsWebApp1 {
     
     
-    public partial class index {
+    public partial class ItemWebUserControl {
         
         /// <summary>
-        /// ItemsDiv control.
+        /// TitleControl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ItemsDiv;
+        protected global::System.Web.UI.WebControls.Label TitleControl;
+        
+        /// <summary>
+        /// DescriptionControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label DescriptionControl;
     }
 }

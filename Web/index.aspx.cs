@@ -15,10 +15,20 @@ namespace AwsWebApp1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            User user = UserManager.FindUser("chberry@gmail.com");
-            if (user != null)
+            if (!this.IsPostBack)
             {
-                Response.Write(user.FirstName + " " + user.LastName);
+                Items items = new Items();
+                if (items.Load())
+                {
+                    foreach (Item item in items)
+                    {
+                        ItemWebUserControl control = (ItemWebUserControl)LoadControl("~/controls/ItemWebUserControl.ascx");
+                        control.Title = item.Title;
+                        control.Description = item.Description;
+
+                        ItemsDiv.Controls.Add(control);
+                    }
+                }
             }
         }
     }

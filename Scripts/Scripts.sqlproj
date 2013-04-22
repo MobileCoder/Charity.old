@@ -55,6 +55,6 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="tblUsers.sql" />
+    <None Include="Initialization.sql" />
   </ItemGroup>
 </Project>
