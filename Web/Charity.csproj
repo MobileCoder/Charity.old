@@ -68,19 +68,27 @@
   <ItemGroup>
     <Content Include="AmazonSetup.aspx" />
     <Content Include="App_Data\Charity.sdf" />
+    <Content Include="App_Themes\default\common.css" />
     <Content Include="Global.asax" />
+    <Content Include="header.asmx" />
     <Content Include="images\database.png" />
     <Content Include="images\drive.png" />
     <Content Include="images\server.png" />
     <Content Include="index.aspx" />
     <Content Include="controls\ItemWebUserControl.ascx" />
+    <Content Include="js\common.js" />
+    <Content Include="js\header.js" />
+    <Content Include="js\jquery-cookie.js" />
+    <Content Include="js\jquery-myURL.js" />
     <Content Include="shared\footer.ascx" />
     <Content Include="shared\GoogleAnalyticsBody.ascx" />
     <Content Include="shared\GoogleAnalyticsHeader.ascx" />
     <Content Include="shared\header.ascx" />
     <Content Include="shared\SEO.ascx" />
     <Content Include="styles\styles.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AmazonSetup.aspx.cs">
@@ -99,6 +107,10 @@
     </Compile>
     <Compile Include="controls\ItemWebUserControl.ascx.designer.cs">
       <DependentUpon>ItemWebUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="header.asmx.cs">
+      <DependentUpon>header.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="shared\GoogleAnalyticsBody.ascx.cs">
       <DependentUpon>GoogleAnalyticsBody.ascx</DependentUpon>

@@ -17,19 +17,28 @@ namespace AwsWebApp1
         {
             if (!this.IsPostBack)
             {
-                Items items = new Items();
-                if (items.Load())
+                if (Request["id"] != null)
                 {
+                    Item item = Item.Select(int.Parse(Request["id"]));
+                    AddItem(item);
+                }
+                else
+                {
+                    Items items = new Items();
+                    items.List();
                     foreach (Item item in items)
                     {
-                        ItemWebUserControl control = (ItemWebUserControl)LoadControl("~/controls/ItemWebUserControl.ascx");
-                        control.Title = item.Title;
-                        control.Description = item.Description;
-
-                        ItemsDiv.Controls.Add(control);
+                        AddItem(item);
                     }
                 }
             }
+        }
+
+        private void AddItem(Item item)
+        {
+            ItemWebUserControl control = (ItemWebUserControl)LoadControl("~/controls/ItemWebUserControl.ascx");
+            control.SetItem(item);
+            ItemsDiv.Controls.Add(control);
         }
     }
 }

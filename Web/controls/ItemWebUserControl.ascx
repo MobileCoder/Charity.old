@@ -6,4 +6,7 @@
     <tr>
         <td><asp:Label ID="DescriptionControl" runat="server"></asp:Label></td>
     </tr>
+    <tr>
+        <td><asp:Label ID="AmountLabel" runat="server"></asp:Label></td>
+    </tr>
 </table>

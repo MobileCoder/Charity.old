@@ -7,11 +7,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>    
+    <title>
+        <asp:ContentPlaceHolder ID="titlebar" runat="server"></asp:ContentPlaceHolder>
+    </title>    
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <uc3:SEO ID="SEOControl" runat="server" />
     <uc4:GoogleAnalyticsHeader ID="GoogleAnalyticsHeader1" runat="server" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/jquery-cookie.js"></script>
+    <script src="../js/jquery-myURL.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -22,6 +28,6 @@
             <uc2:Footer ID="FooterControl" runat="server" />        
         </div>        
         <uc5:GoogleAnalyticsBody ID="GoogleAnalyticsBody1" runat="server" />
-    </form>
+    </form>    
 </body>
 </html>

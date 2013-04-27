@@ -13,6 +13,15 @@ namespace AwsWebApp1 {
     public partial class Charity {
         
         /// <summary>
+        /// titlebar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder titlebar;
+        
+        /// <summary>
         /// head control.
         /// </summary>
         /// <remarks>
