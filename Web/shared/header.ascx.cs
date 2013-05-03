@@ -14,25 +14,5 @@ namespace AwsWebApp1.shared
         {
 
         }
-
-        protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
-        {
-            /*
-            Login control = (Login)LoginView1.FindControl("Login1");
-            CharityUser user = CharityUser.Select(control.UserName);
-            if (user == null)
-            {
-                control.FailureText = "User not found";
-                return;
-            }
-
-            if (!user.ValidatePassword(control.Password))
-            {
-                control.FailureText = "Incorrect Password";
-                return;
-            }
-            */
-            e.Authenticated = true;
-        }
     }
 }

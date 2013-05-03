@@ -151,11 +151,20 @@ GO
 
 CREATE PROCEDURE [sp_Users_Update]
 	@id int,
-	@status int = NULL
+	@status int = NULL,
+	@password varchar(100) = NULL
 AS
 BEGIN
-	IF @status IS NOT NULL 
+	DECLARE @_status INT
+	DECLARE @_password VARCHAR(100)
+
+	SELECT @_status=[Status], @_password=[Password] FROM [Users] WHERE [Id]=@id;
+
+	IF @status IS NOT NULL AND @_status <> @status
 		UPDATE [Users] SET [Status] = @status WHERE [Id] = @id;
+
+	IF @password IS NOT NULL AND @_password <> @password
+		UPDATE [Users] SET [Password] = @password WHERE [Id] = @id;
 END
 GO
 

@@ -78,8 +78,10 @@
     <Content Include="controls\ItemWebUserControl.ascx" />
     <Content Include="js\common.js" />
     <Content Include="js\header.js" />
+    <Content Include="js\jquery-1.8.1.min.js" />
     <Content Include="js\jquery-cookie.js" />
     <Content Include="js\jquery-myURL.js" />
+    <Content Include="js\validation.js" />
     <Content Include="shared\footer.ascx" />
     <Content Include="shared\GoogleAnalyticsBody.ascx" />
     <Content Include="shared\GoogleAnalyticsHeader.ascx" />
@@ -177,6 +179,10 @@
     <ProjectReference Include="..\Components\bllCharity\bllCharity.csproj">
       <Project>{d57b8e3c-3178-41e9-9449-4f2fde18a37e}</Project>
       <Name>bllCharity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Components\Utility\Utility.csproj">
+      <Project>{09fa7e66-d319-4dfb-9e99-fde7089247f7}</Project>
+      <Name>Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -90,12 +90,19 @@ namespace bllCharity
             DatabaseParameters parameters = new DatabaseParameters();
             parameters.Add("@id", Id);
             parameters.Add("@status", Status);
+            //parameters.Add("@password", Password);
             return (Database.Instance.NonQuery("sp_Users_Update", parameters) == 1);
         }
 
         public bool ValidatePassword(string _password)
         {
             return (_password == Password);
+        }
+
+        public bool ResetPassword()
+        {
+            Password = "Welcome1";
+            return Update();
         }
     }
 }

@@ -1,10 +1,30 @@
 ﻿$(document).ready(function () {
     DisplayAnonymous(true);
+
+    $('#SignInOptions').hide();
+    $('#RegisterOptions').hide();
+
     $('#LoginButton').click(function () {
         Login();
     });
     $('#Logout').click(function () {
         Logout();
+    });
+
+    $('#ForgotPassword').click(function () {
+        ForgotPassword();
+    });
+
+    $('#RegisterButton').click(function () {
+        RegisterUser();
+    });
+
+    $('#SignIn').click(function () {
+        DisplaySignIn();
+    });
+
+    $('#Register').click(function() {
+        DisplayRegister();
     });
 
     if (userInfo != null) {
@@ -23,8 +43,23 @@ function DisplayAnonymous(showAnonymous) {
     }
 }
 
+function DisplaySignIn() {
+    $('#SignInOptions').show();
+    $('#SignIn').addClass('selected');
+
+    $('#RegisterOptions').hide();
+    $('#Register').removeClass('selected');
+}
+
+function DisplayRegister() {
+    $('#SignInOptions').hide();
+    $('#SignIn').removeClass('selected');
+
+    $('#RegisterOptions').show();
+    $('#Register').addClass('selected');
+}
+
 function Login() {
-    
     var email = $('input[id=emailAddress]').val();
     if (email == null || email.length == 0)
         return;
@@ -34,31 +69,14 @@ function Login() {
         return;
 
     var parameters = "{'email':'" + email + "','password':'" + password + "'}";
-    
-    //"http://localhost:54368/header.asmx/ValidateUser";
-    var webMethod = $.myURL() + "header.asmx/ValidateUser";
 
-    if (customPort != null)
-        webMethod = webMethod.replace('localhost', 'localhost:' + customPort);
-
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        data: parameters,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            info = JSON.parse(msg.d);
-            if (info.IsValid == "False") {
-                alert(info.Message);
-            }
-            else {
-                LoginUser(info);
-                $.cookie('user', info, { expires: 7 });
-            }
-        },
-        error: function (e) {
-            alert("Unavailable");
+    Ajax("header.asmx/ValidateUser", parameters, function(data) {
+        if (data.IsValid == "False") {
+            alert(data.Message);
+        }
+        else {
+            LoginUser(data);
+            $.cookie('user', data, { expires: 7 });
         }
     });
 }
@@ -72,4 +90,18 @@ function LoginUser(info) {
 function Logout() {
     DisplayAnonymous(true);
     $.removeCookie('user');
+}
+
+function ForgotPassword() {
+    var email = $('input[id=emailAddress]').val();
+    if (!validateEmail(email))
+        return;
+
+    var parameters = "{'email':'" + email + "'}";
+    Ajax("header.asmx/ForgotPassword", parameters, function(data) {
+        alert(data.Message);
+    });
+}
+
+function RegisterUser() {
 }

@@ -14,29 +14,53 @@ namespace AwsWebApp1
     [System.Web.Script.Services.ScriptService]
     public class header : System.Web.Services.WebService
     {
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string ValidateUser(string email, string password)
+        private CharityUser GetUser(string email, ClientSettings settings)
         {
-            ClientSettings settings = new ClientSettings();
             CharityUser user = CharityUser.Select(email);
             if (user == null)
             {
                 settings.Message = "User not found";
             }
-            else
+            return user;
+        }
+
+        private bool ValidateUser(CharityUser user, string password, ClientSettings settings)
+        {
+            settings.IsValid = user.ValidatePassword(password);
+            if (!settings.IsValid)
             {
-                if (!user.ValidatePassword(password))
+                settings.Message = "Invalid password";
+            }
+            return settings.IsValid;
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string ValidateUser(string email, string password)
+        {
+            ClientSettings settings = new ClientSettings();
+            CharityUser user = GetUser(email, settings);
+            if (user != null)
+            {
+                if (ValidateUser(user, password, settings))
                 {
-                    settings.Message = "Invalid password";
-                }
-                else
-                {
-                    settings.IsValid = true;
                     settings.DisplayName = user.DisplayName;
                 }
             }
+            return settings.ToString();
+        }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string ForgotPassword(string email)
+        {
+            ClientSettings settings = new ClientSettings();
+            CharityUser user = GetUser(email, settings);
+            if (user != null)
+            {
+                settings.IsValid = user.ResetPassword();                
+                settings.Message = "Your email address will be notified of your reset password";
+            }
             return settings.ToString();
         }
     }
