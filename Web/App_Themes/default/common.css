@@ -1,6 +1,15 @@
 ﻿body {
 }
 
+.hidden {
+    display: none
+}
+
 .selected {
     text-decoration: underline;
+}
+
+.popup {
+    border-style: solid; 
+    border-width: thin; 
 }

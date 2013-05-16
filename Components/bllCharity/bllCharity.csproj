@@ -42,7 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientSettings.cs" />
+    <Compile Include="Bidding.cs" />
+    <Compile Include="JsonBid.cs" />
+    <Compile Include="ItemImage.cs" />
+    <Compile Include="JsonUser.cs" />
+    <Compile Include="BaseSettings.cs" />
+    <Compile Include="JsonItem.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="ErrorManager.cs" />

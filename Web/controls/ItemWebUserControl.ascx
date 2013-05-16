@@ -7,6 +7,11 @@
         <td><asp:Label ID="DescriptionControl" runat="server"></asp:Label></td>
     </tr>
     <tr>
-        <td><asp:Label ID="AmountLabel" runat="server"></asp:Label></td>
+        <td>Current Bid:<span ID="CurrentBidSpan" runat="server" /></td>
+    </tr>
+    <tr>
+        <td>
+            <div id="DivBidding" runat="server"></div>
+        </td>
     </tr>
 </table>

@@ -25,7 +25,7 @@ namespace AwsWebApp1
                 else
                 {
                     Items items = new Items();
-                    items.List();
+                    items.List(Item.ItemStatus.Active);
                     foreach (Item item in items)
                     {
                         AddItem(item);

@@ -2,7 +2,7 @@
 <table width="100%">
     <tr>
         <td><h1>Charity</h1></td>
-        <td width="50%" align="right">
+        <td width="50%" align="right" id="signinTable" style="display: none;">
             <div id="AnonymousLogin">
                 <table>
                     <tr>

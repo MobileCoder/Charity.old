@@ -30,6 +30,8 @@
     if (userInfo != null) {
         LoginUser(userInfo);
     }
+
+    $('#signinTable').show();
 });
 
 function DisplayAnonymous(showAnonymous) {
@@ -60,23 +62,23 @@ function DisplayRegister() {
 }
 
 function Login() {
-    var email = $('input[id=emailAddress]').val();
-    if (email == null || email.length == 0)
+    data = {};
+
+    data.email = $('input[id=emailAddress]').val();
+    if (data.email == null || data.email.length == 0)
         return;
 
-    var password = $('input[id=password]').val();
-    if (password == null || password.length == 0)
+    data.password = $('input[id=password]').val();
+    if (data.password == null || data.password.length == 0)
         return;
 
-    var parameters = "{'email':'" + email + "','password':'" + password + "'}";
-
-    Ajax("header.asmx/ValidateUser", parameters, function(data) {
+    Ajax("wsUsers.asmx/ValidateUser", JSON.stringify(data), function(data) {
         if (data.IsValid == "False") {
             alert(data.Message);
         }
         else {
             LoginUser(data);
-            $.cookie('user', data, { expires: 7 });
+            SaveLoginCookie(info);
         }
     });
 }
@@ -84,7 +86,18 @@ function Login() {
 function LoginUser(info) {
     DisplayAnonymous(false);
     $('#DisplayName').text(info.DisplayName);
-    $.cookie('user', info, { expires: 7 });
+    userInfo = info;
+    SaveLoginCookie(info);
+}
+
+function SaveLoginCookie(info) {
+    cookie = $.cookie('user');
+    if (cookie != null) {
+        if (cookie.Version != info.Version) {
+            $.removeCookie('user');
+        }
+    }
+    $.cookie('user', info, { expires: 30 });
 }
 
 function Logout() {
@@ -93,15 +106,31 @@ function Logout() {
 }
 
 function ForgotPassword() {
-    var email = $('input[id=emailAddress]').val();
-    if (!validateEmail(email))
+    data = {};
+
+    data.email = $('input[id=emailAddress]').val();
+    if (!validateEmail(data.email))
         return;
 
-    var parameters = "{'email':'" + email + "'}";
-    Ajax("header.asmx/ForgotPassword", parameters, function(data) {
+    Ajax("wsUsers.asmx/ForgotPassword", JSON.stringify(data), function(data) {
         alert(data.Message);
     });
 }
 
 function RegisterUser() {
+    data = {};
+
+    data.email = $('input[id=registerEmail]').val();
+    if (!validateEmail(data.email))
+        return;
+
+    Ajax("wsUsers.asmx/RegisterUser", JSON.stringify(data), function (data) {
+        if (!data.IsValid) {
+            alert(data.Message);
+        }
+        else {
+            LoginUser(data);
+            $('div[id=RegisterUserProfile]').show();
+        }
+    });
 }

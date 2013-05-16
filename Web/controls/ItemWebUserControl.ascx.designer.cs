@@ -31,12 +31,21 @@ namespace AwsWebApp1 {
         protected global::System.Web.UI.WebControls.Label DescriptionControl;
         
         /// <summary>
-        /// AmountLabel control.
+        /// CurrentBidSpan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label AmountLabel;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CurrentBidSpan;
+        
+        /// <summary>
+        /// DivBidding control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivBidding;
     }
 }

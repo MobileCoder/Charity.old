@@ -176,5 +176,41 @@ namespace bllCharity
             }
             return -1;
         }
+
+        public object Scalar(string name, DatabaseParameters parameters)
+        {
+            DbConnection connection = Open();
+            if (connection != null)
+            {
+                try
+                {
+                    DbCommand command = connection.CreateCommand();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = name;
+
+                    if (parameters != null)
+                    {
+                        foreach (string key in parameters.Keys)
+                        {
+                            DbParameter parameter = command.CreateParameter();
+                            parameter.ParameterName = key;
+                            parameter.Value = parameters[key];
+                            command.Parameters.Add(parameter);
+                        }
+                    }
+
+                    return command.ExecuteScalar();
+                }
+                catch (Exception ex)
+                {
+                    ReportException(ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return null;
+        }
     }
 }

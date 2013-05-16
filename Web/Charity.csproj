@@ -70,7 +70,11 @@
     <Content Include="App_Data\Charity.sdf" />
     <Content Include="App_Themes\default\common.css" />
     <Content Include="Global.asax" />
-    <Content Include="header.asmx" />
+    <Content Include="js\globalize.js" />
+    <Content Include="js\item.js" />
+    <Content Include="js\index.js" />
+    <Content Include="wsItem.asmx" />
+    <Content Include="wsUsers.asmx" />
     <Content Include="images\database.png" />
     <Content Include="images\drive.png" />
     <Content Include="images\server.png" />
@@ -110,8 +114,12 @@
     <Compile Include="controls\ItemWebUserControl.ascx.designer.cs">
       <DependentUpon>ItemWebUserControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="header.asmx.cs">
-      <DependentUpon>header.asmx</DependentUpon>
+    <Compile Include="wsItem.asmx.cs">
+      <DependentUpon>wsItem.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="wsUsers.asmx.cs">
+      <DependentUpon>wsUsers.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="shared\GoogleAnalyticsBody.ascx.cs">

@@ -19,11 +19,14 @@ namespace bllCharity
             return Database.Instance.NonQuery("sp_Items_Create", parameters);
         }
 
-        public bool List()
+        public bool List(Item.ItemStatus status)
         {
             this.Clear();
 
-            DataTable dt = Database.Instance.Query("sp_Items_Get");
+            DatabaseParameters parameters = new DatabaseParameters();
+            parameters.Add("@status", (int)status);
+
+            DataTable dt = Database.Instance.Query("sp_Items_Get", parameters);
             if (dt != null)
             {
                 foreach (DataRow dr in dt.Rows)
