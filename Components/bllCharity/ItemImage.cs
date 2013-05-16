@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -8,11 +9,12 @@ namespace bllCharity
 {
     public class ItemImage : ErrorManager
     {
-        public ItemImage(int itemId, int userId, string description)
+        public ItemImage(int itemId, int userId, string description, byte[] data)
         {
             ItemId = itemId;
             UserId = userId;
             Description = description;
+            Data = data;
         }
 
         public ItemImage(DataRow dr)
@@ -22,6 +24,7 @@ namespace bllCharity
             UserId = (int)dr["UserId"];
             SequenceNo = (int)dr["SequenceNo"];
             Description = (string)dr["Description"];
+            Data = (byte[])dr["Image"];
         }
 
         public int Id { get; set; }
@@ -29,6 +32,23 @@ namespace bllCharity
         public int UserId { get; set; }
         public int SequenceNo { get; set; }
         public string Description { get; set; }
+        public byte[] Data { get; set; }
+
+        public string Filename
+        {
+            get
+            {
+                return "Image" + Id + ".jpg";
+            }
+        }
+
+        public string Path
+        {
+            get
+            {
+                return System.IO.Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/images/cache"), Filename);
+            }
+        }
 
         public bool Create()
         {
@@ -37,6 +57,7 @@ namespace bllCharity
             parameters.Add("@userId", UserId);
             parameters.Add("@sequenceNo", SequenceNo);
             parameters.Add("@description", Description);
+            parameters.Add("@image", Data);
 
             Database db = Database.Instance;
             object obj = db.Scalar("sp_ItemImages_Create", parameters);
@@ -82,15 +103,28 @@ namespace bllCharity
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    images.Add(new ItemImage(dr));
+                    ItemImage image = new ItemImage(dr);
+                    images.Add(image);
+                    if (!System.IO.File.Exists(image.Path))
+                    {
+                        FileStream fs = new FileStream(image.Path, FileMode.CreateNew, FileAccess.Write);
+                        try
+                        {
+                            fs.Write(image.Data, 0, image.Data.Length);
+                        }
+                        finally
+                        {
+                            fs.Close();
+                        }
+                    }
                 }
             }
             return images;
         }
 
-        public bool AddImage(int userId, string description)
+        public bool AddImage(int userId, string description, byte[] data)
         {
-            ItemImage image = new ItemImage(ItemId, userId, description);
+            ItemImage image = new ItemImage(ItemId, userId, description, data);
             if (image.Create())
             {
                 this.Add(image);

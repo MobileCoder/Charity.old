@@ -43,18 +43,24 @@ namespace AwsWebApp1
         }
 
         [WebMethod]
-        public string AddImage(int userId, int itemId, string description)
+        public string AddImage(int userId, int itemId, string description, string filename)
         {
             JsonItem rc = new JsonItem();
             Item item = Item.Select(itemId);
-            if (item.Images.AddImage(userId, description))
+            if (item == null)
             {
-                rc.Id.Value = item.Id;
-                rc.IsValid.Value = true;
+                rc.Message.Value = "Item not found";
             }
             else
             {
-                rc.Message.Value = item.Exception;
+                if (item.AddImage(userId, description, filename))
+                {
+                    rc.IsValid.Value = true;
+                }
+                else
+                {
+                    rc.Message.Value = item.Exception;
+                }
             }
             return rc.ToString();
         }

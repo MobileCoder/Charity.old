@@ -15,19 +15,23 @@ namespace AwsWebApp1
         {
             if (!IsPostBack)
             {
-                System.Web.UI.HtmlControls.HtmlInputText input = new System.Web.UI.HtmlControls.HtmlInputText();
-                input.Attributes.Add("ItemId", Id.ToString());
-                DivBidding.Controls.Add(input);
-
-                System.Web.UI.HtmlControls.HtmlInputButton button = new System.Web.UI.HtmlControls.HtmlInputButton();
-                button.Attributes.Add("ItemId", Id.ToString());
-                DivBidding.Controls.Add(button);
+                BidAmount.Attributes.Add("ItemId", Id.ToString());
+                BidButton.Attributes.Add("ItemId", Id.ToString());
+                CurrentBidSpan.Attributes.Add("ItemId", Id.ToString());
 
                 TitleControl.Text = Title;
                 DescriptionControl.Text = Description;
-
-                CurrentBidSpan.Attributes.Add("ItemId", Id.ToString());
                 CurrentBidSpan.InnerText = CurrentBid.ToString("c");
+
+                if (Images != null)
+                {
+                    for (int i = 0; i < Images.Count; i++)
+                    {
+                        System.Web.UI.HtmlControls.HtmlImage control = new System.Web.UI.HtmlControls.HtmlImage();
+                        control.Src = System.IO.Path.Combine(@"~/images/cache", Images[i].Filename);
+                        images.Controls.Add(control);
+                    }
+                }
             }
         }
 
@@ -37,11 +41,13 @@ namespace AwsWebApp1
             Title = item.Title;
             Description = item.Description;
             CurrentBid = item.CurrentBid;
+            Images = item.Images;
         }
 
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal CurrentBid { get; set; }
+        public ItemImages Images { get; set; }
     }
 }
