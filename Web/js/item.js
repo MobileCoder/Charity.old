@@ -11,8 +11,8 @@ function CreateBid(event) {
     itemId = event.data.param1;
     data = {};
 
-    if (userInfo == null) {
-        alert('User needs to be logged in');
+    if (!validateUser()) {
+        return;
     }
 
     data.userId = userInfo.Id;

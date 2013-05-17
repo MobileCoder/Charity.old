@@ -20,6 +20,7 @@ namespace AwsWebApp1
                 CurrentBidSpan.Attributes.Add("ItemId", Id.ToString());
 
                 TitleControl.Text = Title;
+                TitleControl.NavigateUrl = "~/itemDetails.aspx?Id=" + Id;
                 DescriptionControl.Text = Description;
                 CurrentBidSpan.InnerText = CurrentBid.ToString("c");
 

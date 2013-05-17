@@ -69,7 +69,10 @@
     <Content Include="AmazonSetup.aspx" />
     <Content Include="App_Data\Charity.sdf" />
     <Content Include="App_Themes\default\common.css" />
+    <Content Include="controls\ItemImageWebUserControl.ascx" />
     <Content Include="Global.asax" />
+    <Content Include="itemDetails.aspx" />
+    <Content Include="js\itemDetails.js" />
     <Content Include="js\globalize.js" />
     <Content Include="js\item.js" />
     <Content Include="js\index.js" />
@@ -104,6 +107,13 @@
     <Compile Include="AmazonSetup.aspx.designer.cs">
       <DependentUpon>AmazonSetup.aspx</DependentUpon>
     </Compile>
+    <Compile Include="controls\ItemImageWebUserControl.ascx.cs">
+      <DependentUpon>ItemImageWebUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controls\ItemImageWebUserControl.ascx.designer.cs">
+      <DependentUpon>ItemImageWebUserControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -113,6 +123,14 @@
     </Compile>
     <Compile Include="controls\ItemWebUserControl.ascx.designer.cs">
       <DependentUpon>ItemWebUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Preferences.cs" />
+    <Compile Include="itemDetails.aspx.cs">
+      <DependentUpon>itemDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="itemDetails.aspx.designer.cs">
+      <DependentUpon>itemDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="wsItem.asmx.cs">
       <DependentUpon>wsItem.asmx</DependentUpon>

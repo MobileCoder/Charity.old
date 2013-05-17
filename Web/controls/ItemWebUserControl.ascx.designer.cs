@@ -19,7 +19,7 @@ namespace AwsWebApp1 {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TitleControl;
+        protected global::System.Web.UI.WebControls.HyperLink TitleControl;
         
         /// <summary>
         /// images control.

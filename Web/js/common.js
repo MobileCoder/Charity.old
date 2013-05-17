@@ -45,3 +45,11 @@ function UpdateRegisterUserProfile() {
         alert(data);
     });
 }
+
+function validateUser() {
+    if (userInfo == null) {
+        alert('User needs to be logged in');
+        return false;
+    }
+    return true;
+}
