@@ -53,3 +53,7 @@ function validateUser() {
     }
     return true;
 }
+
+function validateEmail(email) {
+    return true;
+}

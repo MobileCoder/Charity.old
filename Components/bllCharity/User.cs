@@ -40,7 +40,7 @@ namespace bllCharity
         public int OrganizationId { get; set; }
         public CharityUserSecurityLevel UserSecurity { get; set; }
         public string Email { get; set; }
-        private string Password { get; set; }
+        public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public CharityUserStatus Status { get; set; }
@@ -98,13 +98,26 @@ namespace bllCharity
             return null;
         }
 
+        private static Random random = new Random((int)DateTime.Now.Ticks);
+        private static string RandomString(int Size)
+        {
+            StringBuilder builder = new StringBuilder();
+            char ch;
+            for (int i = 0; i < Size; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+            return builder.ToString();
+        }
+
         public static CharityUser Create(string email, out string error)
         {
             error = string.Empty;
 
             int organizationId = 0;
             int userSecurity = (int)CharityUserSecurityLevel.User;
-            string password = string.Empty;
+            string password = RandomString(8);
             string firstname = string.Empty;
             string lastname = string.Empty;
             int status = (int)CharityUserStatus.Active;
@@ -120,7 +133,7 @@ namespace bllCharity
 
             Database db = Database.Instance;
             object obj = db.Scalar("sp_Users_Create", parameters);
-            if (obj != null)
+            if (obj == null)
             {
                 error = db.Exception;
             }

@@ -14,14 +14,18 @@ namespace AwsWebApp1
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            Database.Configuration = ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["ConnectionString"]];
+            Database.Configuration = ConfigurationManager.ConnectionStrings["LocalConnectionString"];
+            if (Database.Configuration == null)
+            {
+                Database.Configuration = ConfigurationManager.ConnectionStrings["AmazonConnectionString"];
+            }
+
             Utility.Email.Initialize(
                 ConfigurationManager.AppSettings["Email.Host"],
                 int.Parse(ConfigurationManager.AppSettings["Email.Port"]),
                 ConfigurationManager.AppSettings["Email.Address"],
                 ConfigurationManager.AppSettings["Email.DisplayName"],
                 ConfigurationManager.AppSettings["Email.Password"]);
-            //Utility.Email.Send("cberry@fareportal.com", "Fareportal Craig Berry", "Testing 2", "abc 123");
         }
 
         protected void Session_Start(object sender, EventArgs e)

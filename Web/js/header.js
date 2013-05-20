@@ -125,7 +125,7 @@ function RegisterUser() {
         return;
 
     Ajax("wsUsers.asmx/RegisterUser", JSON.stringify(data), function (data) {
-        if (!data.IsValid) {
+        if (data.IsValid == "False") {
             alert(data.Message);
         }
         else {

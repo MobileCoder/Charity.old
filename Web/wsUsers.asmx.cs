@@ -71,16 +71,28 @@ namespace AwsWebApp1
         {
             JsonUser settings = new JsonUser();
             string error = string.Empty;
-            CharityUser user = CharityUser.Create(email, out error);
+
+            CharityUser user = CharityUser.Select(email);
             if (user != null)
             {
-                settings.Id.Value = user.Id;
-                settings.DisplayName.Value = user.DisplayName;
-                settings.IsValid.Value = true;
+                settings.Message.Value = "User already exists";
             }
             else
             {
-                settings.Message.Value = error;
+                user = CharityUser.Create(email, out error);
+                if (user != null)
+                {
+                    string emailBody = "Your password is " + user.Password;
+                    Utility.Email.Send(email, user.DisplayName, "Your Password", emailBody);
+
+                    settings.Id.Value = user.Id;
+                    settings.DisplayName.Value = user.DisplayName;
+                    settings.IsValid.Value = true;
+                }
+                else
+                {
+                    settings.Message.Value = error;
+                }
             }
             return settings.ToString();
         }

@@ -71,6 +71,7 @@
     <Content Include="App_Themes\default\common.css" />
     <Content Include="controls\ItemImageWebUserControl.ascx" />
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
     <Content Include="itemDetails.aspx" />
     <Content Include="js\itemDetails.js" />
     <Content Include="js\globalize.js" />
