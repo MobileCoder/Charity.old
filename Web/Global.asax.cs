@@ -11,14 +11,13 @@ namespace AwsWebApp1
 {
     public class Global : System.Web.HttpApplication
     {
-
         protected void Application_Start(object sender, EventArgs e)
         {
-            Database.Configuration = ConfigurationManager.ConnectionStrings["LocalConnectionString"];
-            if (Database.Configuration == null)
-            {
+            #if DEBUG
+                Database.Configuration = ConfigurationManager.ConnectionStrings["LocalConnectionString"];
+            #else
                 Database.Configuration = ConfigurationManager.ConnectionStrings["AmazonConnectionString"];
-            }
+            #endif
 
             Utility.Email.Initialize(
                 ConfigurationManager.AppSettings["Email.Host"],
