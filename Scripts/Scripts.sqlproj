@@ -55,6 +55,62 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Initialization.sql" />
+    <None Include="tblUsers.sql" />
+    <None Include="tblAddress.sql" />
+    <None Include="tblAddressType.sql" />
+    <None Include="tblCreditCard.sql" />
+    <None Include="tblOrganizationType.sql" />
+    <None Include="tblOrganization.sql" />
+    <None Include="tblUserSecurity.sql" />
+    <None Include="tblUserStatus.sql" />
+    <None Include="sp_Users_Get.sql" />
+    <None Include="sp_Users_Create.sql" />
+    <None Include="sp_Users_Update.sql" />
+    <None Include="tblItemStatus.sql" />
+    <None Include="tblItems.sql" />
+    <None Include="sp_Items_Get.sql" />
+    <None Include="sp_Items_Create.sql" />
+    <None Include="sp_Items_Update.sql" />
+    <None Include="tblItemsImages.sql" />
+    <None Include="sp_ItemImages_Get.sql" />
+    <None Include="sp_ItemImages_Create.sql" />
+    <None Include="tblBidErrors.sql" />
+    <None Include="sp_BidErrors_Get.sql" />
+    <None Include="tblBids.sql" />
+    <None Include="sp_Bids_Insert.sql" />
+    <None Include="amazon.cmd" />
+    <None Include="local.cmd" />
+    <None Include="scripts.cmd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="tblCreditCardType.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sp_Address_Get.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sp_Address_Insert.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sp_Address_Update.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="tblContactType.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="tblContact.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sp_Contact_Insert.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sp_Contact_Update.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sp_Contact_Get.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="tblContactInfoType.sql" />
+    <Build Include="tblContactInfo.sql" />
   </ItemGroup>
 </Project>

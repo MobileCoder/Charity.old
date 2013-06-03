@@ -28,38 +28,38 @@ namespace AwsWebApp1
 
             if (item.Create())
             {
-                item.Status = Item.ItemStatus.Active;
+                item.Status = Item.ItemStatus.Pending;
                 item.Update();
 
-                rc.Id.Value = item.Id;
-                rc.IsValid.Value = true;
+                rc.Id = item.Id;
+                rc.IsValid = true;
             }
             else
             {
-                rc.Message.Value = item.Exception;
+                rc.Message = item.Exception;
             }
 
             return rc.ToString();
         }
 
         [WebMethod]
-        public string AddImage(int userId, int itemId, string description, string filename)
+        public string AddImage(int userId, int itemId, string description, byte[] data)
         {
             JsonItem rc = new JsonItem();
             Item item = Item.Select(itemId);
             if (item == null)
             {
-                rc.Message.Value = "Item not found";
+                rc.Message = "Item not found";
             }
             else
             {
-                if (item.AddImage(userId, description, filename))
+                if (item.AddImage(userId, description, data))
                 {
-                    rc.IsValid.Value = true;
+                    rc.IsValid = true;
                 }
                 else
                 {
-                    rc.Message.Value = item.Exception;
+                    rc.Message = item.Exception;
                 }
             }
             return rc.ToString();
@@ -73,7 +73,7 @@ namespace AwsWebApp1
             Item item = Item.Select(itemId);
             if (item == null)
             {
-                rc.Message.Value = "Item not found";
+                rc.Message = "Item not found";
             }
             else
             {
@@ -81,15 +81,15 @@ namespace AwsWebApp1
                 Bidding.Status status = item.Bid(userId, ip, amount);
                 if (status == Bidding.Status.Success)
                 {
-                    rc.IsValid.Value = true;
+                    rc.IsValid = true;
                 }
                 else 
                 {
-                    rc.Message.Value = Bidding.Instance.Description(status);
+                    rc.Message = Bidding.Instance.Description(status);
                 }
 
                 item = Item.Select(itemId);
-                rc.Amount.Value = item.CurrentBid;
+                rc.Amount = item.CurrentBid;
             }
 
             return rc.ToString();

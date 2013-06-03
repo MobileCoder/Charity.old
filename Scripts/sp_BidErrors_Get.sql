@@ -1,0 +1,16 @@
+﻿SET NOCOUNT ON
+
+USE Charity
+GO
+
+IF OBJECT_ID('sp_BidErrors_Get', 'P') IS NOT NULL
+	DROP PROCEDURE [sp_BidErrors_Get]
+GO
+
+CREATE PROCEDURE [sp_BidErrors_Get]
+AS
+BEGIN
+	SELECT * FROM [BidErrors];
+	RETURN 0;
+END
+GO

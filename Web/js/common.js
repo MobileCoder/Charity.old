@@ -9,13 +9,32 @@ $(document).ready(function () {
     });
 
     userInfo = $.cookie('user');
+    if (userInfo) {
+        data = {};
+        data.Id = userInfo.Id;
+        Ajax("wsUsers.asmx/ValidateUserById", JSON.stringify(data), function (data) {
+            if (data.IsValid == "False") {
+                Logout();
+                alert(data.Message);
+            }
+            else {
+                LoginUser(data);
+            }
+        });
+    }
 });
 
-function Ajax(method, parameters, cb) {
-    var webMethod = $.myURL() + method;
+function RootUrl() {
+    var root = $.myURL();
 
     if (customPort != null)
-        webMethod = webMethod.replace('localhost', 'localhost:' + customPort);
+        root = root.replace('localhost', 'localhost:' + customPort);
+
+    return root;
+}
+
+function Ajax(method, parameters, cb) {
+    var webMethod = RootUrl() + method;
 
     $.ajax({
         type: "POST",
@@ -52,6 +71,14 @@ function validateUser() {
         return false;
     }
     return true;
+}
+
+function isTrue(v) {
+    return ((v.toUpperCase() == "TRUE") || (v == '1'))
+}
+
+function isFalse(v) {
+    return ((v.toUpperCase() == "FALSE") || (v == '0'))
 }
 
 function validateEmail(email) {

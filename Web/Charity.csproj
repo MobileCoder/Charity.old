@@ -77,6 +77,8 @@
     <Content Include="js\globalize.js" />
     <Content Include="js\item.js" />
     <Content Include="js\index.js" />
+    <Content Include="js\profile.js" />
+    <Content Include="profile.aspx" />
     <Content Include="wsItem.asmx" />
     <Content Include="wsUsers.asmx" />
     <Content Include="images\database.png" />
@@ -108,6 +110,9 @@
     <Compile Include="AmazonSetup.aspx.designer.cs">
       <DependentUpon>AmazonSetup.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="controls\ItemImageWebUserControl.ascx.cs">
       <DependentUpon>ItemImageWebUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -132,6 +137,13 @@
     </Compile>
     <Compile Include="itemDetails.aspx.designer.cs">
       <DependentUpon>itemDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="profile.aspx.cs">
+      <DependentUpon>profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="profile.aspx.designer.cs">
+      <DependentUpon>profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="wsItem.asmx.cs">
       <DependentUpon>wsItem.asmx</DependentUpon>

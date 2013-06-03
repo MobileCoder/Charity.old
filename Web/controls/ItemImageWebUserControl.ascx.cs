@@ -20,26 +20,27 @@ namespace AwsWebApp1.controls
         {
             if (!IsPostBack)
             {
+                UploadDetails_File.Attributes.Add("ItemId", ItemId.ToString());
+                UploadDetails_File.Accept = "image/*";
+
                 largeImage.Visible = false;
                 scrollImages.Visible = false;
 
-                if (Images != null)
+                if (Images != null && Images.Count > 0)
                 {
                     largeImage.Visible = true;
                     largeImage.Controls.Add(BuildImagesControl(Images[0], ImageType.Large));
 
-                    if (Images.Count > 1)
+                    for (int i = 1; i < Images.Count; i++)
                     {
-                        for (int i = 1; i < Images.Count; i++)
-                        {
-                            scrollImages.Visible = true;
-                            scrollImages.Controls.Add(BuildImagesControl(Images[i], ImageType.Small));
-                        }
+                        scrollImages.Visible = true;
+                        scrollImages.Controls.Add(BuildImagesControl(Images[i], ImageType.Small));
                     }
                 }
             }
         }
 
+        public int ItemId { get; set; }
         public ItemImages Images { get; set; }
 
         private System.Web.UI.HtmlControls.HtmlImage BuildImagesControl(ItemImage image, ImageType type)

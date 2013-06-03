@@ -1,0 +1,21 @@
+﻿SET NOCOUNT ON
+
+USE Charity
+GO
+
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' AND TABLE_NAME='CreditCardType')
+	DROP TABLE [CreditCardType]
+GO
+
+CREATE TABLE [CreditCardType]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	[Description] VARCHAR(100) NOT NULL
+)
+GO
+
+INSERT INTO [CreditCardType] VALUES ('Mastercard');
+INSERT INTO [CreditCardType] VALUES ('Visa');
+GO
+
+SELECT * FROM [CreditCardType] 

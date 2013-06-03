@@ -5,19 +5,14 @@ using System.Text;
 
 namespace bllCharity
 {
-    public class JsonUser : BaseSettings
+    [Serializable]
+    public class JsonUser : JsonObject
     {
         public JsonUser() : base()
         {
-            DisplayName = new BaseSettingParameter<string>("DisplayName", string.Empty);
+            DisplayName = string.Empty;
         }
 
-        public BaseSettingParameter<string> DisplayName { get; set; }
-
-        public override string ToString()
-        {
-            string data = DisplayName.ToString();
-            return base.ToString(data);
-        }
+        public string DisplayName { get; set; }
     }
 }

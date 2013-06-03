@@ -30,6 +30,7 @@ namespace AwsWebApp1
                     {
                         ItemTitle.Text = item.Title;
                         ItemDescription.Text = item.Description;
+                        images.ItemId = item.Id;
                         images.Images = item.Images;
                     }
                 }

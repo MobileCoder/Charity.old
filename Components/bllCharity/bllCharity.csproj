@@ -35,6 +35,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,11 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address.cs" />
     <Compile Include="Bidding.cs" />
+    <Compile Include="Contact.cs" />
+    <Compile Include="JsonObject.cs" />
     <Compile Include="JsonBid.cs" />
     <Compile Include="ItemImage.cs" />
     <Compile Include="JsonUser.cs" />
-    <Compile Include="BaseSettings.cs" />
     <Compile Include="JsonItem.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Database.cs" />

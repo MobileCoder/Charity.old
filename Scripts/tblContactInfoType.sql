@@ -1,0 +1,21 @@
+﻿SET NOCOUNT ON
+
+USE Charity
+GO
+
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' AND TABLE_NAME='ContactInfoType')
+	DROP TABLE [ContactInfoType]
+GO
+
+CREATE TABLE [ContactInfoType]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	[Description] VARCHAR(100) NOT NULL
+)
+GO
+
+INSERT INTO [ContactInfoType] VALUES ('Home Phone');
+INSERT INTO [ContactInfoType] VALUES ('Mobile Phone');
+GO
+
+SELECT * FROM [ContactInfoType]

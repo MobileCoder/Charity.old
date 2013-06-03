@@ -88,25 +88,11 @@ namespace bllCharity
             return (Database.Instance.NonQuery("sp_Items_Update", parameters) == 1);
         }
 
-        public bool AddImage(int userId, string description, string filename)
+        public bool AddImage(int userId, string description, byte[] data)
         {
             try
             {
-                FileInfo fiImage = new FileInfo(filename);
-                long length = fiImage.Length;
-                byte[] data = new byte[Convert.ToInt32(length)];
-
-                FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
-                try
-                {
-                    int iBytesRead = fs.Read(data, 0, Convert.ToInt32(length));
-                    Images.AddImage(userId, description, data);
-                    return true;
-                }
-                finally
-                {
-                    fs.Close();
-                }
+                Images.AddImage(userId, description, data);
             }
             catch (Exception ex)
             {

@@ -7,6 +7,7 @@
     $('#LoginButton').click(function () {
         Login();
     });
+
     $('#Logout').click(function () {
         Logout();
     });
@@ -25,6 +26,10 @@
 
     $('#Register').click(function() {
         DisplayRegister();
+    });
+
+    $('#DisplayName').click(function () {
+        ShowProfilePage();
     });
 
     if (userInfo != null) {
@@ -133,4 +138,9 @@ function RegisterUser() {
             $('div[id=RegisterUserProfile]').show();
         }
     });
+}
+
+function ShowProfilePage() {
+    var url = RootUrl() + "profile.aspx";
+    window.location = url;
 }

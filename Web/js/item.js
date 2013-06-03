@@ -20,10 +20,8 @@ function CreateBid(event) {
     data.amount = $('input[itemid="' + itemId + '"][type="text"]').val()
 
     validate = new Validation();
-    if (validate.hasData(data.amount)) {
-        if (!validate.hasData(data.userId)) {
-            alert('User need to be logged in');
-        }
+    if (validate.hasData(data.userId) &&
+        validate.hasData(data.amount)) {
 
         Ajax("wsItem.asmx/Bid", JSON.stringify(data), function (data) {
             if (data.IsValid == "False") {

@@ -6,6 +6,7 @@
     <table>
         <tr>
             <td>Description: <input id="UploadDetails_Description" type="text" /></td>
+            <td><input id="UploadDetails_File" runat="server" type="file" /></td>
             <td><input id="UploadDetails_Upload" type="button" value="Upload" /></td>
         </tr>
     </table>
