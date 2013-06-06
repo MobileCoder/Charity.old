@@ -88,7 +88,7 @@ function Login() {
             }
             else {
                 LoginUser(data);
-                SaveLoginCookie(info);
+                SaveLoginCookie(data);
             }
         }
     });
@@ -99,6 +99,7 @@ function LoginUser(info) {
     $('#DisplayName').text(info.DisplayName);
     userInfo = info;
     SaveLoginCookie(info);
+    ProcessLoginEvents();
 }
 
 function SaveLoginCookie(info) {
@@ -114,7 +115,13 @@ function SaveLoginCookie(info) {
 
 function Logout() {
     DisplayAnonymous(true);
+    userInfo = null;
     $.removeCookie('user');
+    ProcessLoginEvents();
+}
+
+function ProcessLoginEvents() {
+    if (DisplayCreateItem) DisplayCreateItem();
 }
 
 function ForgotPassword() {

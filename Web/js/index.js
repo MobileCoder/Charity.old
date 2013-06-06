@@ -1,12 +1,23 @@
 ﻿$(document).ready(function () {
+    DisplayCreateItem();
+
     $('#CreateItem').click(function () {
         $('#CreateItemDetails').show();
     });
-
+    
     $('#CreateItemDetails_CreateItem').click(function () {
         CreateItem();
     });
 });
+
+function DisplayCreateItem() {
+    if (userInfo != null) {
+        $('#CreateItem').show();
+    }
+    else {
+        $('#CreateItem').hide();
+    }
+}
 
 function CreateItem() {
     data = {};
