@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
     DisplayAnonymous(true);
 
     $('#SignInOptions').hide();
@@ -77,13 +78,18 @@ function Login() {
     if (data.password == null || data.password.length == 0)
         return;
 
-    Ajax("wsUsers.asmx/ValidateUser", JSON.stringify(data), function(data) {
-        if (data.IsValid == "False") {
+    Ajax("wsUsers.asmx/ValidateUser", JSON.stringify(data), function (data) {
+        if (isFalse(data.IsValid)) {
             alert(data.Message);
         }
         else {
-            LoginUser(data);
-            SaveLoginCookie(info);
+            if (isFalse(data.IsActive)) {
+                alert('Inactive user');
+            }
+            else {
+                LoginUser(data);
+                SaveLoginCookie(info);
+            }
         }
     });
 }
@@ -102,7 +108,8 @@ function SaveLoginCookie(info) {
             $.removeCookie('user');
         }
     }
-    $.cookie('user', info, { expires: 30 });
+    //$.cookie('user', info, { expires: 30 });
+    $.cookie('user', info);
 }
 
 function Logout() {

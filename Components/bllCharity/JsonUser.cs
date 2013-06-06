@@ -13,6 +13,13 @@ namespace bllCharity
             DisplayName = string.Empty;
         }
 
+        public void Populate(CharityUser user)
+        {
+            Id = user.Id;
+            DisplayName = user.DisplayName;
+        }
+
         public string DisplayName { get; set; }
+        public bool IsActive { get; set; }
     }
 }

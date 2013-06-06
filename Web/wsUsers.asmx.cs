@@ -23,11 +23,12 @@ namespace AwsWebApp1
         private bool ValidateUser(CharityUser user, string password, JsonObject settings)
         {
             settings.IsValid = (user != null);
+            
             if (!settings.IsValid)
             {
                 settings.Message = "User not found";
                 return false;
-            }
+            }            
 
             if (!string.IsNullOrEmpty(password))
             {
@@ -39,21 +40,19 @@ namespace AwsWebApp1
                 }
             }
 
-            settings.IsValid = (user.Status == CharityUser.CharityUserStatus.Active);
-            if (!settings.IsValid)
+            if (settings is JsonUser)
             {
-                settings.Message = "Inactive user";
-                return false;
-            }
-
-            if (settings.IsValid)
-            {
-                settings.Id = user.Id;
-                if (settings is JsonUser)
+                JsonUser u = (JsonUser)settings;
+                u.IsActive = (user.Status == CharityUser.CharityUserStatus.Active);
+                if (!u.IsActive)
                 {
-                    ((JsonUser)settings).DisplayName = user.DisplayName;
+                    settings.Message = "Inactive user";
+                    return false;
                 }
+
+                u.Populate(user);
             }
+            
             return true;
         }
 

@@ -8,6 +8,8 @@ $(document).ready(function () {
         UpdateRegisterUserProfile();
     });
 
+    //$.removeCookie('user');
+
     userInfo = $.cookie('user');
     if (userInfo) {
         data = {};
@@ -74,11 +76,11 @@ function validateUser() {
 }
 
 function isTrue(v) {
-    return ((v.toUpperCase() == "TRUE") || (v == '1'))
+    return ((v.toString().toUpperCase() == "TRUE") || (v == '1'))
 }
 
 function isFalse(v) {
-    return ((v.toUpperCase() == "FALSE") || (v == '0'))
+    return ((v.toString().toUpperCase() == "FALSE") || (v == '0'))
 }
 
 function validateEmail(email) {
