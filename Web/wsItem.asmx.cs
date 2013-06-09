@@ -33,6 +33,8 @@ namespace AwsWebApp1
 
                 rc.Id = item.Id;
                 rc.IsValid = true;
+
+                //EventNotification.Created(item);
             }
             else
             {

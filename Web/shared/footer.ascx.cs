@@ -11,7 +11,10 @@ namespace AwsWebApp1.shared
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                lblVersion.Text = Application["Version"].ToString();
+            }
         }
     }
 }

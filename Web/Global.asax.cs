@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
@@ -13,6 +14,10 @@ namespace AwsWebApp1
     {
         protected void Application_Start(object sender, EventArgs e)
         {
+            Assembly web = Assembly.GetExecutingAssembly();
+            AssemblyName webName = web.GetName();
+            Application["Version"] = webName.Version.ToString();
+
             #if DEBUG
                 Database.Configuration = ConfigurationManager.ConnectionStrings["LocalConnectionString"];
             #else
@@ -25,6 +30,8 @@ namespace AwsWebApp1
                 ConfigurationManager.AppSettings["Email.Address"],
                 ConfigurationManager.AppSettings["Email.DisplayName"],
                 ConfigurationManager.AppSettings["Email.Password"]);
+
+            //EventNotification.ItemCreatedList = ConfigurationManager.AppSettings["EventNotification.ItemCreatedList"];
         }
 
         protected void Session_Start(object sender, EventArgs e)
