@@ -73,6 +73,7 @@
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="itemDetails.aspx" />
+    <Content Include="js\alerts.js" />
     <Content Include="js\itemDetails.js" />
     <Content Include="js\globalize.js" />
     <Content Include="js\item.js" />
@@ -207,6 +208,7 @@
   <ItemGroup>
     <Content Include="shared\Charity.Master" />
     <None Include="images\README" />
+    <None Include="Local.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

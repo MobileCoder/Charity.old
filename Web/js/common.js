@@ -1,8 +1,12 @@
 ﻿userInfo = null;
 customPort = 54368;
+validation = null;
+alerts = null;
 
 $(document).ready(function () {
     $.cookie.json = true;
+    validation = new Validation();
+    alerts = new Alerts();
 
     $('#UpdateRegisterUserProfile').click(function () {
         UpdateRegisterUserProfile();
@@ -24,6 +28,8 @@ $(document).ready(function () {
             }
         });
     }
+
+    ProcessLoginEvents();
 });
 
 function RootUrl() {
@@ -54,6 +60,24 @@ function Ajax(method, parameters, cb) {
     });
 }
 
+function isTrue(v) {
+    return ((v.toString().toUpperCase() == "TRUE") || (v == '1'))
+}
+
+function isFalse(v) {
+    return ((v.toString().toUpperCase() == "FALSE") || (v == '0'))
+}
+
+function disableButton(id) {
+    $('#' + id).unbind('click');
+}
+
+function enableButton(id, cb) {
+    $('#' + id).click(function () {
+        cb(); 
+    });
+}
+
 function UpdateRegisterUserProfile() {
     data = {};
 
@@ -67,22 +91,16 @@ function UpdateRegisterUserProfile() {
     });
 }
 
-function validateUser() {
-    if (userInfo == null) {
-        alert('User needs to be logged in');
-        return false;
+function formatCurrency(amount) {
+    return Globalize.format(Number(amount), 'C');
+}
+
+function ProcessLoginEvents() {
+    if (displayCreateItem != null) {
+        displayCreateItem();
     }
-    return true;
-}
 
-function isTrue(v) {
-    return ((v.toString().toUpperCase() == "TRUE") || (v == '1'))
-}
-
-function isFalse(v) {
-    return ((v.toString().toUpperCase() == "FALSE") || (v == '0'))
-}
-
-function validateEmail(email) {
-    return true;
+    if (displayBidButton != null) {
+        displayBidButton();
+    }
 }

@@ -1,16 +1,12 @@
 ﻿$(document).ready(function () {
-    DisplayCreateItem();
-
     $('#CreateItem').click(function () {
         $('#CreateItemDetails').show();
     });
-    
-    $('#CreateItemDetails_CreateItem').click(function () {
-        CreateItem();
-    });
+
+    enableCreateItem();
 });
 
-function DisplayCreateItem() {
+function displayCreateItem() {
     if (userInfo != null) {
         $('#CreateItem').show();
     }
@@ -19,7 +15,12 @@ function DisplayCreateItem() {
     }
 }
 
+function enableCreateItem() {
+    enableButton('CreateItem', RegisterUser);
+}
+
 function CreateItem() {
+    disableButton('CreateItem');
     data = {};
 
     data.userId = userInfo.Id;
@@ -31,12 +32,13 @@ function CreateItem() {
     data.initialBid = $('input[id=CreateItemDetails_InitialBid]').val();
 
     Ajax("wsItem.asmx/Create", JSON.stringify(data), function (data) {
-        if (data.IsValid == "False") {
-            alert(data.Message);
+        if (isFalse(data.IsValid)) {
+            alerts.displayMessage(data.Message);
         }
         else {
-            
-            alert("success");
+            alerts.success();
         }
+
+        enableCreateItem();
     });
 }

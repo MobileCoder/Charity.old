@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
     DisplayAnonymous(true);
 
     $('#SignInOptions').hide();
@@ -13,13 +12,8 @@ $(document).ready(function () {
         Logout();
     });
 
-    $('#ForgotPassword').click(function () {
-        ForgotPassword();
-    });
-
-    $('#RegisterButton').click(function () {
-        RegisterUser();
-    });
+    enableForgotPassword();
+    enableRegisterButton();
 
     $('#SignIn').click(function () {
         DisplaySignIn();
@@ -67,31 +61,49 @@ function DisplayRegister() {
     $('#Register').addClass('selected');
 }
 
+function enableLogin() {
+    enableButton('Login', ForgotPassword);
+}
+
 function Login() {
+    disableButton('Login');
+
     data = {};
-
     data.email = $('input[id=emailAddress]').val();
-    if (data.email == null || data.email.length == 0)
-        return;
-
     data.password = $('input[id=password]').val();
-    if (data.password == null || data.password.length == 0)
-        return;
 
-    Ajax("wsUsers.asmx/ValidateUser", JSON.stringify(data), function (data) {
-        if (isFalse(data.IsValid)) {
-            alert(data.Message);
-        }
-        else {
-            if (isFalse(data.IsActive)) {
-                alert('Inactive user');
+    isValid = true;
+
+    if (!validation.isEmail(data.email)) {
+        alerts.requireEmail();
+        isValid = false;
+    }
+
+    if (!validation.hasData(data.password)) {
+        alerts.requirePassword();
+        isValid = false;
+    }
+
+    if (!isValid) {
+        enableLogin();
+    }
+    else {
+        Ajax("wsUsers.asmx/ValidateUser", JSON.stringify(data), function (data) {
+            if (isFalse(data.IsValid)) {
+                alerts.displayAlert(data.Message);
             }
             else {
-                LoginUser(data);
-                SaveLoginCookie(data);
+                if (isFalse(data.IsActive)) {
+                    alerts.displayAlert('Inactive user');
+                }
+                else {
+                    LoginUser(data);
+                    SaveLoginCookie(data);
+                }
             }
-        }
-    });
+            enableLogin();
+        });
+    }
 }
 
 function LoginUser(info) {
@@ -120,37 +132,51 @@ function Logout() {
     ProcessLoginEvents();
 }
 
-function ProcessLoginEvents() {
-    if (DisplayCreateItem) DisplayCreateItem();
+function enableForgotPassword() {
+    enableButton('ForgotPassword', ForgotPassword);
 }
 
 function ForgotPassword() {
+    disableButton('ForgotPassword');
     data = {};
-
     data.email = $('input[id=emailAddress]').val();
-    if (!validateEmail(data.email))
+
+    if (!validation.isEmail(data.email)) {
+        alerts.requireEmail();
+        enableForgotPassword();
         return;
+    }
 
     Ajax("wsUsers.asmx/ForgotPassword", JSON.stringify(data), function(data) {
         alert(data.Message);
+        enableForgotPassword();
     });
 }
 
-function RegisterUser() {
-    data = {};
+function enableRegisterButton() {
+    enableButton('RegisterButton', RegisterUser);
+}
 
+function RegisterUser() {
+    disableButton('RegisterButton');
+    data = {};
     data.email = $('input[id=registerEmail]').val();
-    if (!validateEmail(data.email))
+
+    if (!validation.isEmail(data.email)) {
+        alerts.requireEmail();
+        enableRegisterButton();
         return;
+    }
 
     Ajax("wsUsers.asmx/RegisterUser", JSON.stringify(data), function (data) {
-        if (data.IsValid == "False") {
-            alert(data.Message);
+        if (isFalse(data.IsValid)) {
+            alerts.displayAlert(data.Message);
         }
         else {
-            LoginUser(data);
-            $('div[id=RegisterUserProfile]').show();
+            alerts.displayAlert('Your password has been sent to you');
         }
+
+        enableRegisterButton();
     });
 }
 

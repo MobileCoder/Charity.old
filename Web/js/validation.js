@@ -1,6 +1,7 @@
 ﻿function Validation() {
     var _this = {
         hasData: hasData,
+        userLoggedIn: userLoggedIn,
         isEmail: isEmail
     }
 
@@ -10,11 +11,12 @@
         return (text != null && text.length > 0);
     }
 
+    function userLoggedIn() {
+        return (userInfo != null);
+    }
 
     function isEmail(email) {
-        if (email == null || email.length == 0)
-            return false;
-
-        return true;
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
     }
 }
