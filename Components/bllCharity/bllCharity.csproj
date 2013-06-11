@@ -51,12 +51,19 @@
     <Compile Include="ItemImage.cs" />
     <Compile Include="JsonUser.cs" />
     <Compile Include="JsonItem.cs" />
+    <Compile Include="Notifications.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="ErrorManager.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Items.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{09fa7e66-d319-4dfb-9e99-fde7089247f7}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

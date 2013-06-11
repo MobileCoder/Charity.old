@@ -109,9 +109,6 @@ namespace AwsWebApp1
                 user = CharityUser.Create(email, out error);
                 if (user != null)
                 {
-                    string emailBody = "Your password is " + user.Password;
-                    Utility.Email.Send(email, user.DisplayName, "Your Password", emailBody);
-
                     settings.Id = user.Id;
                     settings.DisplayName = user.DisplayName;
                     settings.IsValid = true;

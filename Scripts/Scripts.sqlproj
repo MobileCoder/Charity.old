@@ -112,5 +112,8 @@
   <ItemGroup>
     <Build Include="tblContactInfoType.sql" />
     <Build Include="tblContactInfo.sql" />
+    <None Include="tblNotificationType.sql" />
+    <None Include="sp_Notification_Insert.sql" />
+    <None Include="tblNotifications.sql" />
   </ItemGroup>
 </Project>

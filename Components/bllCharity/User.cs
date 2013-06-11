@@ -276,7 +276,9 @@ namespace bllCharity
                 int id = (int)obj;
                 if (id > 0)
                 {
-                    return CharityUser.Select(id);
+                    CharityUser user = CharityUser.Select(id);
+                    Notifications.NewUser(user);
+                    return user;
                 }
             }
             return null;
@@ -303,15 +305,16 @@ namespace bllCharity
         public bool SetPassword(string password)
         {
             Password = password;
-            return true;
+            return Update();
         }
 
         public bool ResetPassword()
         {
-            string password = "Welcome1";
+            string password = RandomString(8);
             if (SetPassword(password))
             {
-                return Update();
+                Notifications.ResetPassword(this);
+                return true;
             }
             return false;
         }
