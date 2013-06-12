@@ -4,7 +4,9 @@
         requireLogin: requireLogin,
         requireEmail: requireEmail,
         requirePassword: requirePassword,
-        success: success
+        success: success,
+        afterToday: afterToday,
+        expireLaterThanStart: expireLaterThanStart
     }
 
     return _this;
@@ -27,5 +29,13 @@
 
     function success() {
         displayAlert('success');
+    }
+
+    function afterToday() {
+        displayAlert('The start date needs to be after today');
+    }
+
+    function expireLaterThanStart() {
+        displayAlert('The expiration date needs to be later than the start date');
     }
 }

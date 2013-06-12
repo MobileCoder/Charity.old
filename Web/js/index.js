@@ -16,11 +16,11 @@ function displayCreateItem() {
 }
 
 function enableCreateItem() {
-    enableButton('CreateItem', RegisterUser);
+    enableButton('CreateItemDetails_CreateItem', CreateItem);
 }
 
 function CreateItem() {
-    disableButton('CreateItem');
+    disableButton('CreateItemDetails_CreateItem');
     data = {};
 
     data.userId = userInfo.Id;
@@ -31,14 +31,29 @@ function CreateItem() {
     data.cashValue = $('input[id=CreateItemDetails_CashValue]').val();
     data.initialBid = $('input[id=CreateItemDetails_InitialBid]').val();
 
-    Ajax("wsItem.asmx/Create", JSON.stringify(data), function (data) {
-        if (isFalse(data.IsValid)) {
-            alerts.displayMessage(data.Message);
-        }
-        else {
-            alerts.success();
-        }
+    isValid = true;
+    if (!validation.isAfterToday(data.startDate)) {
+        alerts.afterToday();
+        isValid = false;
+    }
+    else if (!validation.isLaterThan(data.expireDate, data.startDate)) {
+        alerts.expireLaterThanStart();
+        isValid = false;
+    }
 
+    if (isValid) {
+        Ajax("wsItem.asmx/Create", JSON.stringify(data), function (data) {
+            if (isFalse(data.IsValid)) {
+                alerts.displayMessage(data.Message);
+            }
+            else {
+                alerts.success();
+            }
+
+            enableCreateItem();
+        });
+    }
+    else {
         enableCreateItem();
-    });
+    }
 }
